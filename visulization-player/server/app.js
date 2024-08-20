@@ -241,17 +241,17 @@
 
 // Import the express module
 const express = require('express');
-
-// Create an instance of express
 const app = express();
-
-// Define a route for the root URL ("/")
-app.get('/', (req, res) => {
-  res.send('Hello, World!');
-});
-
-// Make the server listen on port 3000
 const port = 3000;
-app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
+
+app.use(express.json());
+
+app.get('/api/hello', (req, res) => {
+  res.json({ message: 'Hello from Express API!' });
 });
+
+app.listen(port, () => {
+  console.log(`Server running on http://localhost:${port}`);
+});
+
+module.exports = app; // Export the app for use in serverless function

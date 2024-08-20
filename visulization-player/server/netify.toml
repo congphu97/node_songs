@@ -1,7 +1,10 @@
-[build]
-  publish = "public"
-  functions = "netlify/functions"
+[functions]
+  external_node_modules = ["express"]
+  node_bundler = "esbuild"
 
+
+  
+# Redirect all requests to index.html (useful for single-page applications)
 [[redirects]]
   from = "/*"
   to = "/index.html"
