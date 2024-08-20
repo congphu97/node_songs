@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netlify Node.js Example</title>
+</head>
+<body>
+    <h1>Netlify Node.js Example</h1>
+    <button id="fetchData">Fetch Data</button>
+    <p id="responseData"></p>
+
+    <script>
+        document.getElementById('fetchData').addEventListener('click', async () => {
+            const response = await fetch('/.netlify/functions/hello');
+            const data = await response.json();
+            document.getElementById('responseData').innerText = data.message;
+        });
+    </script>
+</body>
+</html>
