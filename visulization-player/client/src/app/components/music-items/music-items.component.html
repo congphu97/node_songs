@@ -1,0 +1,12 @@
+<input [(ngModel)]="search" (change)="searchChange($event)">
+<div class="audio-container">
+    <ng-container *ngFor="let item of audioItems">
+        <div class="audio-item">
+            <img [src]="item.bestThumbnail.url"/>
+            <div class="audio-item__description description">
+                <div class="description__title">{{item.title}}</div>
+                <div class="description__authur">{{item.author.name}}</div>
+            </div>
+        </div>
+    </ng-container>
+</div>

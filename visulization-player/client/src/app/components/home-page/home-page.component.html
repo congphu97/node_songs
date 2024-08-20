@@ -1,0 +1,58 @@
+<div class="audio-player">
+    <div >
+        <div class="audio-player--visualize">
+            <div>
+                <!-- <div class="audio-player__album">
+                    <img src="https://tse2.mm.bing.net/th?id=OIP.EN6jwO3yIq-uRMtPRcWiNAHaEK&pid=Api&P=0&h=220">
+                </div>
+                <app-audio-visualizer
+                    #visualizer
+                    [audioUrl]="'http://localhost:3000/files/output.mp3'"
+                    (timeUpdate)="updateProgress()"
+                    (musicLoaded)="initializeProgress()">
+                </app-audio-visualizer> -->
+                <app-visualization-spaceman
+                    #visualizer
+                    [audioUrl]="'http://localhost:3000/files/output.mp3'"
+                    (timeUpdate)="updateProgress()"
+                    (musicLoaded)="initializeProgress()">
+                </app-visualization-spaceman>
+            </div>
+            <img src="assets/mode.svg">
+
+        </div>
+        <div class="audio-player__name">MỘNG YU</div>
+        <div class="audio-player__artist">AMEE x MCK</div>
+
+    </div>
+</div>
+
+<div class="sticky">
+    <div class="progress">
+        <div class="progress__container">
+            <div class="progress__container__duration">
+                <div>{{formatTime(currentTime)}}</div>
+                <div>{{formatTime(duration)}}</div>
+            </div>
+            <input type="range" [attr.max]="duration" [attr.value]="currentTime" (input)="seekAudio($event)" class="range purple" />
+        </div>
+    </div>
+    <div class="audio-player__music-player">
+        <div class="controls">
+            <button (click)="prevTrack()">
+                <img src="assets/previous.svg">
+            </button>
+            <button (click)="togglePlay()">
+                <ng-container *ngIf="isPlaying">
+                    <img src="assets/pause.svg">
+                </ng-container>
+                <ng-container *ngIf="!isPlaying">
+                    <img src="assets/play.svg">
+                </ng-container>
+            </button>
+            <button (click)="nextTrack()">
+                <img src="assets/next.svg">
+            </button>
+        </div>
+    </div>
+</div>

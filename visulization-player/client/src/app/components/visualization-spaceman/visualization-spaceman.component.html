@@ -1,0 +1,9 @@
+<div class="audio-visualizer">
+    <audio id="audio" style="display:none;"
+      controls [src]="audioUrl"
+      crossorigin="anonymous"
+      (timeupdate)="timeUpdate.emit()"
+      (loadedmetadata)="musicLoaded.emit()">
+    </audio>
+    <div id="out"></div>
+  </div>
