@@ -268,7 +268,7 @@ export class VisualizationSpacemanComponent implements AfterViewInit, OnDestroy 
         positionAttribute.setXYZ(i, vertex.x, vertex.y, vertex.z);
       }
 
-      mesh.geometry.attributes.position.needsUpdate = true;
+      mesh.geometry.attributes['position'].needsUpdate = true;
       mesh.geometry.computeVertexNormals();
     }
   }

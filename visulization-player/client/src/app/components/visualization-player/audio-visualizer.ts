@@ -177,7 +177,7 @@ export class AudioVisualizerComponent implements AfterViewInit, OnDestroy {
     if (!mesh.geometry.isBufferGeometry) return;
 
     const geometry = mesh.geometry as THREE.BufferGeometry;
-    const positionAttribute = geometry.attributes.position as THREE.BufferAttribute;
+    const positionAttribute = geometry.attributes['position'] as THREE.BufferAttribute;
     const vertex = new THREE.Vector3();
     const time = window.performance.now();
     const offset = 10; // Adjust as needed
@@ -215,7 +215,7 @@ export class AudioVisualizerComponent implements AfterViewInit, OnDestroy {
         positionAttribute.setXYZ(i, vertex.x, vertex.y, vertex.z);
       }
 
-      mesh.geometry.attributes.position.needsUpdate = true;
+      mesh.geometry.attributes['position'].needsUpdate = true;
       mesh.geometry.computeVertexNormals();
     }
   }
