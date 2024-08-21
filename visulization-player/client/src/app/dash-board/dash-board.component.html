@@ -1,0 +1,11 @@
+<div class="dashboard">
+    <div class="dashboard__header">
+        <p>Visualization Music</p>
+        <div class="search">
+            <input class="search__input" placeholder="Search" [(ngModel)]="search" (change)="searchChange($event)">
+        </div>
+    </div>
+    <div class="dashboard__list">
+        <app-music-items [audioItems]="audioItems"></app-music-items>
+    </div>
+</div>

@@ -5,10 +5,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class SongService {
-    public url = "http://localhost:3000";
-    private apiKey = '985f273150e7119200350e8806fa2e15';
-    private apiUrl = 'https://ws.audioscrobbler.com/2.0/';
-  
+    public url = "https://visualization-api.netlify.app";
 
     constructor(private http: HttpClient) { }
 
@@ -17,6 +14,6 @@ export class SongService {
     }
 
     getSong(songTitle: string) {
-      return this.http.get<any[]>(`${this.url}/api/search?keywork=${songTitle}`);
+      return this.http.get<any[]>(`${this.url}/api/search?keyword=${songTitle}`);
     }
 }

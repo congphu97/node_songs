@@ -1,0 +1,25 @@
+.dashboard {
+    &__header {
+        display: flex;
+        height: 50px;
+        background: black;
+        color: white;
+        place-items: center;
+        justify-content: space-between;
+        padding: 0 20px;
+
+        .search {
+            border-radius: 5px;
+            padding: 5px;
+            background: white;
+
+            &__input {
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                height: 25px;
+                padding: 0 5px;
+                outline: none;
+            }
+        }
+    }
+}

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { SongService } from '../services/song.services';
 import { IAudio } from '../interfaces/audio.interface';
 
@@ -9,17 +9,12 @@ import { IAudio } from '../interfaces/audio.interface';
 })
 export class MusicItemsComponent implements OnInit {
 
-  public search!: string;
-  public audioItems: IAudio[] = [];
+  @Input() public audioItems: IAudio[] = [];
 
-  constructor(private _songService: SongService) { }
+  constructor() { }
 
   ngOnInit(): void {
 
   }
 
-  searchChange(event: any) {
-    console.log(event)
-    this._songService.getSong(event.target.value).subscribe((rs) => this.audioItems = rs );
-  }
 }

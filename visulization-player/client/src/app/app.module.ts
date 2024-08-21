@@ -10,6 +10,7 @@ import { AudioVisualizerComponent } from './components/visualization-player/audi
 import { StickyPlayerComponent } from './components/sticky-player/sticky-player.component';
 import { VisualizationSpacemanComponent } from './components/visualization-spaceman/visualization-spaceman.component';
 import { MusicItemsComponent } from './components/music-items/music-items.component';
+import { DashBoardComponent } from './dash-board/dash-board.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { MusicItemsComponent } from './components/music-items/music-items.compon
     StickyPlayerComponent,
     VisualizationSpacemanComponent,
     MusicItemsComponent,
+    DashBoardComponent,
   ],
   imports: [
     BrowserModule,
