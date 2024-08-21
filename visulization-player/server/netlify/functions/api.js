@@ -8,11 +8,11 @@ const ffmpeg = require('fluent-ffmpeg');
 const fs = require('fs');
 const path = require('path');
 const ffmpegPath = require('ffmpeg-static');
-const searchYouTube = require('../services/youtube.services');
+const { searchYouTube } = require('../services/youtube.services');
 const mp3Directory = path.join(__dirname, './../../assets');
 
 const app = express();
-const port =  process.env.PORT || 3000;
+const port = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(express.json());
@@ -20,7 +20,7 @@ app.use(express.json());
 const router = express.Router();
 
 //Get all students
-router.get('/', (req, res) => {
+router.get('/api', (req, res) => {
   res.send('App is running..');
 });
 
@@ -47,8 +47,10 @@ router.get('/search', async (req, res) => {
     }
 
     const data = await searchYouTube(keyword);
+    res.send((data));
     res.json(data);
   } catch (error) {
+    console.error(error);
     res.status(500).json({ error: 'An error occurred while searching for songs' });
   }
 });
@@ -57,7 +59,7 @@ router.get('/search', async (req, res) => {
 //   console.log(`Server running on http://localhost:${port}`);
 // });
 
-// app.use('/', router);
-app.use('/.netlify/functions/api', router);
+app.use('/', router);
+// app.use('/.netlify/functions/api', router);
 
 module.exports.handler = serverless(app);

@@ -8,7 +8,6 @@ module.exports.searchYouTube = async function(query) {
 
         // Extract and display the video titles and links
         const result = searchResults.items.filter(item => item.type === 'video');
-
         return result;
     } catch (err) {
         console.error(err);

@@ -1,8 +1,9 @@
 [build]
-  publish = "public"
+  command = "# no build command"
   functions = "netlify/functions"
+  publish = "dist/client"
 
-[[redirects]]
+  [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
