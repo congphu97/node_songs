@@ -39,7 +39,7 @@ router.get('/api/songs', (req, res) => {
   });
 });
 
-router.get('/search', async (req, res) => {
+router.get('/api/search', async (req, res) => {
   try {
     const keyword = req.query.keyword;
     if (!keyword) {
