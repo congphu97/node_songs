@@ -7,3 +7,11 @@
   from = "/*"
   to = "/index.html"
   status = 200
+
+  [build]
+  command = "ng build --prod"
+  publish = "dist/<your-angular-app>"
+
+[plugins]
+  [[plugins]]
+    package = "@netlify/angular-runtime"
