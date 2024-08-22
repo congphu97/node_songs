@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { SongService } from '../services/song.services';
 import { AudioVisualizerComponent } from '../visualization-player/audio-visualizer';
+import { IAudio } from '../interfaces/audio.interface';
 
 @Component({
   selector: 'home-page',
@@ -19,6 +20,8 @@ export class HomePageComponent implements OnInit {
   volume = 100;
   mp3Files: string[] = [];
   test!:string;
+  public stream!: string;
+  public audio!: IAudio;
 
   get audioVisualize(): any {
     const audioElement = this.visualizer.audioElement;
@@ -29,10 +32,16 @@ export class HomePageComponent implements OnInit {
   constructor(private _songService: SongService) { }
 
   ngOnInit(): void {
-    this._songService.getData().subscribe((rs) => {
-      this.mp3Files = rs;
+    this._songService.currentAudio$.pipe()
+    .subscribe((audio) => {
+      console.log({audio})
+      if (audio) {
+        this.stream = `http://localhost:3000/api/play?url=${audio.url}`;
+        this.audio = audio;
+        this.duration = 0;
+        this.currentTime = 0;
+      }
     });
-
   }
 
   playAudio(): void {
@@ -66,7 +75,8 @@ export class HomePageComponent implements OnInit {
 
   initializeProgress(): void {
     if (this.audioVisualize) {
-      this.duration = this.audioVisualize?.duration;
+      console.log(this.audioVisualize.duration)
+      this.duration = this.audioVisualize.duration;
     }
   }
 

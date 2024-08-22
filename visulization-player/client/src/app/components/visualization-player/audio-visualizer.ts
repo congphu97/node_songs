@@ -68,9 +68,10 @@ export class AudioVisualizerComponent implements AfterViewInit, OnDestroy {
     }
 
     this.renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-    this.renderer.setSize(500, 300);
-    // this.renderer.setSize(window.innerWidth, window.innerHeight);
-    document.getElementById('out')?.appendChild(this.renderer.domElement);
+    // this.renderer.setSize(500, 500);
+    const element = document.getElementById('out');
+    this.renderer.setSize(Number(element?.clientWidth), Number(element?.clientHeight));
+    element?.appendChild(this.renderer.domElement);
 
     this.addObjectsToScene();
     window.addEventListener('resize', this.onWindowResize.bind(this), false);

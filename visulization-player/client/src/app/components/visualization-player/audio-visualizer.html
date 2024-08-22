@@ -3,7 +3,7 @@
       controls [src]="audioUrl"
       crossorigin="anonymous"
       (timeupdate)="timeUpdate.emit()"
-      (loadedmetadata)="musicLoaded.emit()">
+      (timeupdate)="musicLoaded.emit()">
     </audio>
     <div id="out"></div>
   </div>

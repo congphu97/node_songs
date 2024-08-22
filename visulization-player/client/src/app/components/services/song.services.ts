@@ -1,11 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
+import { environment } from 'src/environments/environment';
+import { IAudio } from '../interfaces/audio.interface';
 @Injectable({
   providedIn: 'root',
 })
 export class SongService {
-    public url = "https://visualization-api.netlify.app";
+
+    public currentAudio$: Subject<IAudio> = new Subject();
+    public url = environment.songApi;
 
     constructor(private http: HttpClient) { }
 
@@ -13,7 +17,11 @@ export class SongService {
       return this.http.get<string[]>(`${this.url}/api/songs`);
     }
 
-    getSong(songTitle: string) {
+    getListAudio(songTitle: string) {
       return this.http.get<any[]>(`${this.url}/api/search?keyword=${songTitle}`);
+    }
+
+    getAudio(url: string) {
+      return this.http.get<any[]>(`${this.url}/api/play?url=${url}`);
     }
 }

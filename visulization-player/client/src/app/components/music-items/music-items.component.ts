@@ -11,10 +11,14 @@ export class MusicItemsComponent implements OnInit {
 
   @Input() public audioItems: IAudio[] = [];
 
-  constructor() { }
+  constructor(private _songService: SongService) { }
 
   ngOnInit(): void {
 
+  }
+
+  playSong(audio: IAudio) {
+    this._songService.currentAudio$.next(audio);
   }
 
 }

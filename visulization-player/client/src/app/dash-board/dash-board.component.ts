@@ -19,6 +19,6 @@ export class DashBoardComponent {
   }
 
   searchChange(event: any) {
-    this._songService.getSong(event.target.value).subscribe((rs) => this.audioItems = rs );
+    this._songService.getListAudio(event.target.value).subscribe((rs) => this.audioItems = rs );
   }
 }

@@ -1,6 +1,6 @@
 <div class="audio-container">
     <ng-container *ngFor="let item of audioItems">
-        <div class="audio-item">
+        <div class="audio-item" (click)="playSong(item)">
             <img [src]="item.bestThumbnail.url"/>
             <div class="audio-item__description description">
                 <div class="description__title">{{item.title}}</div>
@@ -9,3 +9,4 @@
         </div>
     </ng-container>
 </div>
+<home-page></home-page>

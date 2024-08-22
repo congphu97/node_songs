@@ -3,7 +3,6 @@
 }
 
 .audio-player {
-
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -12,6 +11,10 @@
     padding: 20px;
     font-family: Lexend;
 
+    .container {
+        max-width: 500px;
+        text-align: center;
+    }
 
     &__album {
         text-align: center;
@@ -28,14 +31,14 @@
     &__name {
         font-size: 32px;
         font-weight: 600;
+        color: white;
     }
 
     &__artist {
         font-size: 20px;
         font-weight: 500;
+        color: white;
     }
-
-
 
     &__music-player {
         display: flex;
@@ -49,34 +52,15 @@
         }
 
         button {
+            cursor: pointer;
             border-radius: 50%;
             background: #ffffff;
             color: white;
-            height: 50px;
-            width: 50px;
+            height: 60px;
+            width: 60px;
             margin: 10px;
-            box-shadow: 1px 3px 5px 5px #ecd7d7;
+            // box-shadow: 1px 3px 5px 5px #ecd7d7;
         }
-    }
-}
-
-button {
-    padding: 10px 15px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    background-color: #007bff;
-    color: white;
-    font-size: 16px;
-    transition: background-color 0.3s;
-
-    &:hover {
-        background-color: #0056b3;
-    }
-
-    &:disabled {
-        background-color: #cccccc;
-        cursor: not-allowed;
     }
 }
 
@@ -105,11 +89,12 @@ button {
     width: 100px;
 }
 
-input[type="range"]::-webkit-slider-runnable-track { // line button
+input[type="range"]::-webkit-slider-runnable-track {
+    // line button
     -webkit-appearance: none;
     // border-radius: 10px;
     // box-shadow: 0px 0px 3px 3px white;
-    background: #a45655;
+    background: #ffffff;
     height: 5px;
 }
 
@@ -125,10 +110,11 @@ input[type="range"]:focus {
     margin: 10px 0;
 }
 
-input[type="range"]::-webkit-slider-thumb { // round button
+input[type="range"]::-webkit-slider-thumb {
+    // round button
     -webkit-appearance: none;
     border: 6px solid white;
-    background: #a45655;
+    background: #ffffff;
     border-radius: 50%;
     height: 20px;
     width: 20px;
@@ -180,15 +166,16 @@ input[type="range"]::-moz-range-thumb {
     color: white; // Text color
     text-align: center; // Center the text
     z-index: 1000; // Ensures it stays on top if needed
-    border-top: 10px solid;
+    // border-top: 10px solid;\
+    border-top: 1px solid;
 }
 
 .progress {
     width: 100%;
-    margin: 10px 0;
     display: flex;
     justify-content: center;
     width: 100%;
+    padding: 10px;
 
     &__container {
         width: 550px;
@@ -197,10 +184,23 @@ input[type="range"]::-moz-range-thumb {
             display: flex;
             justify-content: space-between;
             // width: 100%;
-            font-size: 16px;
+            font-size: 14px;
             font-weight: 600;
-            color: #a45655;
+            color: #ffffff;
+        }
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .audio-player {
+        .container {
+            width: 100%;
         }
     }
 
+    .progress {
+        &__container {
+            width: 320px;
+        }
+    }
 }
