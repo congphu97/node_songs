@@ -22,6 +22,6 @@ export class SongService {
     }
 
     getAudio(url: string) {
-      return this.http.get<any[]>(`${this.url}/api/play?url=${url}`);
+      return this.http.get<string>(`${this.url}/api/play?url=${url}`);
     }
 }

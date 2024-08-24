@@ -16,9 +16,8 @@ const port = process.env.PORT || 3000;
 // Path to ffmpeg binary
 app.use(cors());
 app.use(express.json());
-
+const request = require('request');
 const router = express.Router();
-
 //Get all students
 router.get('/api', (req, res) => {
   res.send('App is running..');
@@ -27,24 +26,36 @@ router.get('/api', (req, res) => {
 // Serve static files from the 'mp3-files' directory
 router.use('/files', express.static(path.join(__dirname, './../../assets')));
 
-router.get('/api/play', (req, res) => {
-  const videoUrl = req.query.url;
+router.get('/api/play', async (req, res) => {
+  const link = getAudioUrl(req.query.url).then(url => {
+    console.log('Audio URL:', url);
+    res.json(url);
+  })
+    .catch(err => {
+      console.error('Error:', err);
+    });;
+  console.log({ link })
+});
 
-  if (!videoUrl) {
-    return res.status(400).send('URL is required');
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  next();
+});
+
+// Function to get the audio URL from a YouTube video
+async function getAudioUrl(videoUrl) {
+  try {
+    const info = await ytdl.getInfo(videoUrl);
+    const format = ytdl.chooseFormat(info.formats, { filter: 'audioonly' });
+    return format.url;
+  } catch (error) {
+    throw new Error(`Failed to fetch audio URL: ${error.message}`);
   }
+}
 
-  // Stream audio directly to the response
-  ytdl(videoUrl, {
-    filter: 'audioonly',
-    quality: 'highestaudio'
-  }).pipe(res).on('error', (err) => {
-    console.error('Stream error:', err);
-    res.status(500).send('Error streaming audio');
-  });
-
-  // Add appropriate headers for audio streaming
-  res.setHeader('Content-Type', 'audio/mpeg');
+router.get('/proxy/*', (req, res) => {
+  const url = req.url.replace('/proxy/', '');
+  request({ url, headers: { 'Origin': process.env.URL + port } }).pipe(res);
 });
 
 router.get('/api/search', async (req, res) => {

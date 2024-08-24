@@ -2,7 +2,6 @@ import { Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren } fro
 import { SongService } from '../services/song.services';
 import { AudioVisualizerComponent } from '../visualization-player/audio-visualizer';
 import { IAudio } from '../interfaces/audio.interface';
-import { environment } from 'src/environments/environment.prod';
 
 @Component({
   selector: 'home-page',
@@ -37,7 +36,7 @@ export class HomePageComponent implements OnInit {
     .subscribe((audio) => {
       console.log({audio})
       if (audio) {
-        this.stream = `${environment.songApi}/api/play?url=${audio.url}`;
+         this._songService.getAudio(audio.url).subscribe((rs) => {this.stream = `https://visualization-api.onrender.com/proxy/`+rs});
         this.audio = audio;
         this.duration = 0;
         this.currentTime = 0;
