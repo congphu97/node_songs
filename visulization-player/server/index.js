@@ -55,7 +55,7 @@ async function getAudioUrl(videoUrl) {
 
 router.get('/proxy/*', (req, res) => {
   const url = req.url.replace('/proxy/', '');
-  request({ url, headers: { 'Origin': process.env.URL + port } }).pipe(res);
+  request({ url, headers: { 'Origin': process.env.URL } }).pipe(res);
 });
 
 router.get('/api/search', async (req, res) => {
