@@ -14,6 +14,8 @@ const { PassThrough } = require('stream');
 const app = express();
 const port = process.env.PORT || 3000;
 // Path to ffmpeg binary
+const request = require('request');
+
 app.use(cors());
 app.use(express.json());
 
@@ -95,25 +97,25 @@ router.get('/api/songs', (req, res) => {
   });
 });
 
-router.get('/api/play', (req, res) => {
-  const videoUrl = req.query.url;
+// router.get('/api/play', (req, res) => {
+//   const videoUrl = req.query.url;
 
-  if (!videoUrl) {
-    return res.status(400).send('URL is required');
-  }
+//   if (!videoUrl) {
+//     return res.status(400).send('URL is required');
+//   }
 
-  // Stream audio directly to the response
-  ytdl(videoUrl, {
-    filter: 'audioonly',
-    quality: 'highestaudio'
-  }).pipe(res).on('error', (err) => {
-    console.error('Stream error:', err);
-    res.status(500).send('Error streaming audio');
-  });
+//   // Stream audio directly to the response
+//   ytdl(videoUrl, {
+//     filter: 'audioonly',
+//     quality: 'highestaudio'
+//   }).pipe(res).on('error', (err) => {
+//     console.error('Stream error:', err);
+//     res.status(500).send('Error streaming audio');
+//   });
 
-  // Add appropriate headers for audio streaming
-  res.setHeader('Content-Type', 'audio/mpeg');
-});
+//   // Add appropriate headers for audio streaming
+//   res.setHeader('Content-Type', 'audio/mpeg');
+// });
 // router.get('/api/play', async (req, res) => {
 //   const videoUrl = req.query.url;
 
@@ -163,7 +165,37 @@ router.get('/api/play', (req, res) => {
 //     console.error('Response stream error:', err);
 //   });
 // });
+router.get('/api/play', async (req, res) => {
+  const link = getAudioUrl(req.query.url).then(url => {
+    console.log('Audio URL:', url);
+    res.json(url);
+  })
+    .catch(err => {
+      console.error('Error:', err);
+    });;
+  console.log({ link })
+});
 
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  next();
+});
+
+// Function to get the audio URL from a YouTube video
+async function getAudioUrl(videoUrl) {
+  try {
+    const info = await ytdl.getInfo(videoUrl);
+    const format = ytdl.chooseFormat(info.formats, { filter: 'audioonly' });
+    return format.url;
+  } catch (error) {
+    throw new Error(`Failed to fetch audio URL: ${error.message}`);
+  }
+}
+
+router.get('/api/proxy/*', (req, res) => {
+  const url = req.url.replace('/api/proxy/', '');
+  request({ url, headers: { 'Origin': 'http://localhost:8888/' } }).pipe(res);
+});
 
 router.get('/api/search', async (req, res) => {
   try {
