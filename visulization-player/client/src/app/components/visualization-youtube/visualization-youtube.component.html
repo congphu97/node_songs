@@ -1,0 +1,37 @@
+<div class="audio-player">
+    <div class="container">
+        <div class="audio-player--visualize">
+            <div>
+                <div id="youtube-player" style="display: none"></div>
+            </div>
+        </div>
+        <div class="audio-player__name">{{audio?.title}}</div>
+        <div class="audio-player__artist">{{audio?.author?.name}}</div>
+    </div>
+</div>
+
+<div class="sticky">
+    <div class="progress">
+        <div class="progress__container">
+            <div class="progress__container__duration">
+                <div>{{formatTime(currentTime)}}</div>
+                <div>{{audio?.duration}}</div>
+            </div>
+            <input type="range" [attr.max]="duration" [attr.value]="currentTime" (input)="seekAudio($event)" class="range purple" />
+        </div>
+    </div>
+    <div class="audio-player__music-player">
+        <div class="controls">
+            <img src="assets/previous.svg" (click)="prevTrack()">
+            <button (click)="togglePlay()">
+                <ng-container *ngIf="isPlaying">
+                    <img src="assets/pause.svg">
+                </ng-container>
+                <ng-container *ngIf="!isPlaying">
+                    <img src="assets/play.svg">
+                </ng-container>
+            </button>
+            <img src="assets/next.svg" (click)="nextTrack()">
+        </div>
+    </div>
+</div>

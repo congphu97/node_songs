@@ -19,7 +19,6 @@ export class HomePageComponent implements OnInit {
   isPlaying = false;
   volume = 100;
   mp3Files: string[] = [];
-  test!:string;
   public stream!: string;
   public audio!: IAudio;
 
@@ -33,15 +32,15 @@ export class HomePageComponent implements OnInit {
 
   ngOnInit(): void {
     this._songService.currentAudio$.pipe()
-    .subscribe((audio) => {
-      console.log({audio})
-      if (audio) {
-         this._songService.getAudio(audio.url).subscribe((rs) => {this.stream = `https://visualization-api.onrender.com/proxy/`+rs});
-        this.audio = audio;
-        this.duration = 0;
-        this.currentTime = 0;
-      }
-    });
+      .subscribe((audio) => {
+        console.log({ audio })
+        if (audio) {
+          this._songService.getAudio(audio.url).subscribe((rs) => { this.stream = `http://localhost:8888/api/proxy/` + rs });
+          this.audio = audio;
+          this.duration = 0;
+          this.currentTime = 0;
+        }
+      });
   }
 
   playAudio(): void {

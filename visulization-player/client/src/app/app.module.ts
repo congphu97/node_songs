@@ -12,6 +12,7 @@ import { VisualizationSpacemanComponent } from './components/visualization-space
 import { MusicItemsComponent } from './components/music-items/music-items.component';
 import { DashBoardComponent } from './dash-board/dash-board.component';
 import { VisualizationControlsComponent } from './components/visualization-controls/visualization-controls.component';
+import { VisualizationYoutubeComponent } from './components/visualization-youtube/visualization-youtube.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { VisualizationControlsComponent } from './components/visualization-contr
     MusicItemsComponent,
     DashBoardComponent,
     VisualizationControlsComponent,
+    VisualizationYoutubeComponent,
   ],
   imports: [
     BrowserModule,
