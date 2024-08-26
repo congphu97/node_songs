@@ -42,10 +42,9 @@ export class VisualizationYoutubeComponent {
           this.duration = 0;
           this.currentTime = 0;
           if (this.player) {
-            console.log('Changing video to:', this.audio.id);
             this.player.loadVideoById(this.audio.id);
+            this.isPlaying = true;
           } else {
-            console.error('YouTube player is not initialized.');
             this.onYouTubeIframeAPIReady();
           }
         }

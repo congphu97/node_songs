@@ -2,6 +2,9 @@
     <div class="container">
         <div class="audio-player--visualize">
             <div>
+                <div class="audio-player__album">
+                    <img [src]="audio?.bestThumbnail?.url">
+                </div>
                 <div id="youtube-player" style="display: none"></div>
             </div>
         </div>
