@@ -13,6 +13,7 @@ import { MusicItemsComponent } from './components/music-items/music-items.compon
 import { DashBoardComponent } from './dash-board/dash-board.component';
 import { VisualizationControlsComponent } from './components/visualization-controls/visualization-controls.component';
 import { VisualizationYoutubeComponent } from './components/visualization-youtube/visualization-youtube.component';
+import { VisualizationAlbumComponent } from './components/visualization-album/visualization-album.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { VisualizationYoutubeComponent } from './components/visualization-youtub
     DashBoardComponent,
     VisualizationControlsComponent,
     VisualizationYoutubeComponent,
+    VisualizationAlbumComponent,
   ],
   imports: [
     BrowserModule,

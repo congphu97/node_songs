@@ -1,4 +1,4 @@
-<div class="audio-player">
+<!-- <div class="audio-player">
     <div class="container">
         <div class="audio-player--visualize">
             <div>
@@ -11,8 +11,8 @@
         <div class="audio-player__name">{{audio?.title}}</div>
         <div class="audio-player__artist">{{audio?.author?.name}}</div>
     </div>
-</div>
-
+</div> -->
+<div id="youtube-player" style="display: none"></div>
 <div class="sticky">
     <div class="progress">
         <div class="progress__container">
@@ -24,6 +24,15 @@
         </div>
     </div>
     <div class="audio-player__music-player">
+        <div class="info">
+            <!-- <div>
+                <img class="info__thumbnail" [src]="audio?.bestThumbnail?.url">
+            </div>
+            <div>
+                <div class="info__name">{{audio?.title}}</div>
+                <div class="info__artist">{{audio?.author?.name}}</div>
+            </div> -->
+        </div>
         <div class="controls">
             <img src="assets/previous.svg" (click)="prevTrack()">
             <button (click)="togglePlay()">
@@ -35,6 +44,9 @@
                 </ng-container>
             </button>
             <img src="assets/next.svg" (click)="nextTrack()">
+        </div>
+        <div class="controls">
+            
         </div>
     </div>
 </div>

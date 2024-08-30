@@ -10,10 +10,10 @@
             <app-music-items [audioItems]="audioItems"></app-music-items>
         </ng-container>
         <div *ngIf="!audioItems?.length" class="dashboard__not-found">
-            <h3>Search to play the song. This is the beta version</h3>
+            <div>Search to play the song. This is the beta version</div>
         </div>
     </div>
-
-    <app-visualization-youtube></app-visualization-youtube>
-
+    <div class="dashboard__player">
+        <app-visualization-youtube></app-visualization-youtube>
+    </div>
 </div>

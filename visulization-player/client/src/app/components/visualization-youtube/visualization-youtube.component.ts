@@ -36,7 +36,6 @@ export class VisualizationYoutubeComponent {
 
     this._songService.currentAudio$.pipe()
       .subscribe((audio) => {
-        console.log({ audio })
         if (audio) {
           this.audio = audio;
           this.duration = 0;
@@ -52,7 +51,6 @@ export class VisualizationYoutubeComponent {
   }
 
   ngOnDestroy(): void {
-    // Clean up the player instance
     if (this.player) {
       this.player.destroy();
     }
@@ -63,6 +61,9 @@ export class VisualizationYoutubeComponent {
       height: '390',
       width: '640',
       videoId: '', // Example video ID
+      playerVars: {
+        'autoplay': 1,  // Autoplay the video
+      },
       events: {
         'onReady': this.onPlayerReady.bind(this),
         'onStateChange': this.onPlayerStateChange.bind(this),
@@ -77,8 +78,13 @@ export class VisualizationYoutubeComponent {
 
   onPlayerStateChange(event: YT.OnStateChangeEvent): void {
     console.log('Player state changed: ', event);
-    this.initializeProgress();
-    setInterval(() => this.updateProgress());
+    if (event.data == YT.PlayerState.ENDED) {
+      this.player?.playVideo(); // Restart the video
+    }
+    else if (event.data == YT.PlayerState.PLAYING){
+      this.initializeProgress();
+      setInterval(() => this.updateProgress());
+    }
   }
 
   playAudio(): void {

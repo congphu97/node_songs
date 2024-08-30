@@ -24,7 +24,12 @@
     }
 
     &__list {
+        height: calc(100vh - 200px);
+        overflow: scroll;
+    }
 
+    &__player {
+        height: 150px;
     }
 
     &__not-found {

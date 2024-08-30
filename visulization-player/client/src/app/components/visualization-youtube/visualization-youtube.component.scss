@@ -41,15 +41,26 @@
     }
 
     &__music-player {
-        display: flex;
-        align-items: center;
-        gap: 20px;
+        display: grid;
+        grid-template-columns: repeat(3, calc((100% / 3)));
         width: 100%;
 
-        .controls {
+        .info {
+
+            display: flex;;
             width: 100%;
-            text-align: center;
+            padding: 0 20px;
+
+            &__thumbnail {
+                width: 100px;
+                margin-right: 10px;
+            }
         }
+
+        // .controls {
+        //     width: 100%;
+        //     text-align: center;
+        // }
 
         button {
             cursor: pointer;
@@ -159,14 +170,10 @@ input[type="range"]::-moz-range-thumb {
     position: sticky;
     bottom: 0;
     width: 100%;
-    // border-top: 10px solid white;
-    // background-color: #f4d4d9; // Background color for visibility
     background: var(--background);
-
-    color: white; // Text color
-    text-align: center; // Center the text
-    z-index: 1000; // Ensures it stays on top if needed
-    // border-top: 10px solid;\
+    color: white;
+    text-align: center;
+    z-index: 1000;
     border-top: 1px solid;
 }
 
@@ -175,7 +182,7 @@ input[type="range"]::-moz-range-thumb {
     display: flex;
     justify-content: center;
     width: 100%;
-    padding: 10px;
+    margin: 10px 0;
 
     &__container {
         width: 550px;
