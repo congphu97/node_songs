@@ -2,7 +2,7 @@
     <div class="dashboard__header">
         <p>Visualization Music</p>
         <div class="search">
-            <input class="search__input" placeholder="Search" [(ngModel)]="search" (change)="searchChange($event)">
+            <input class="search__input" placeholder="Search...." [(ngModel)]="search" (change)="searchChange($event)">
         </div>
     </div>
     <div class="dashboard__list">
@@ -10,10 +10,12 @@
             <app-music-items [audioItems]="audioItems"></app-music-items>
         </ng-container>
         <div *ngIf="!audioItems?.length" class="dashboard__not-found">
-            <div>Search to play the song. This is the beta version</div>
+            <div class="dashboard__intro">Search to play the song. This is the beta version</div>
         </div>
     </div>
     <div class="dashboard__player">
         <app-visualization-youtube></app-visualization-youtube>
+        <!-- <app-visualization-album></app-visualization-album> -->
+
     </div>
 </div>

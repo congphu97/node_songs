@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { IAudio } from '../interfaces/audio.interface';
 import { SongService } from '../services/song.services';
 
@@ -10,6 +10,7 @@ import { SongService } from '../services/song.services';
 export class VisualizationYoutubeComponent {
 
   @Input() audioUrl: string | undefined;
+  @Input() isShowDetail!: boolean;
 
   public duration: number | undefined = 0;
   public currentTime: number = 0;
@@ -17,7 +18,6 @@ export class VisualizationYoutubeComponent {
   public volume = 100;
   public audio!: IAudio;
   private player: YT.Player | undefined;
-  private timer: any;
 
   constructor(private _songService: SongService) { }
 
@@ -35,6 +35,19 @@ export class VisualizationYoutubeComponent {
     }
 
     this._songService.currentAudio$.pipe()
+      .subscribe((audio) => {
+        if (audio) {
+          this.audio = audio;
+          this.duration = 0;
+          this.currentTime = 0;
+          if (this.player) {
+            this.player.loadVideoById(this.audio.id);
+            this.isPlaying = true;
+          } else {
+            this.onYouTubeIframeAPIReady();
+          }
+        }
+      });    this._songService.currentAudio$.pipe()
       .subscribe((audio) => {
         if (audio) {
           this.audio = audio;
@@ -80,6 +93,7 @@ export class VisualizationYoutubeComponent {
     console.log('Player state changed: ', event);
     if (event.data == YT.PlayerState.ENDED) {
       this.player?.playVideo(); // Restart the video
+      this.currentTime= 0 ;
     }
     else if (event.data == YT.PlayerState.PLAYING){
       this.initializeProgress();

@@ -1,17 +1,19 @@
-<!-- <div class="audio-player">
-    <div class="container">
-        <div class="audio-player--visualize">
-            <div>
-                <div class="audio-player__album">
-                    <img [src]="audio?.bestThumbnail?.url">
+<ng-container *ngIf="isShowDetail">
+    <div class="audio-player">
+        <div class="container">
+            <div class="audio-player--visualize">
+                <div>
+                    <div class="audio-player__album">
+                        <img [src]="audio?.bestThumbnail?.url">
+                    </div>
+                    <div id="youtube-player" style="display: none"></div>
                 </div>
-                <div id="youtube-player" style="display: none"></div>
             </div>
+            <div class="audio-player__name">{{audio?.title}}</div>
+            <div class="audio-player__artist">{{audio?.author?.name}}</div>
         </div>
-        <div class="audio-player__name">{{audio?.title}}</div>
-        <div class="audio-player__artist">{{audio?.author?.name}}</div>
     </div>
-</div> -->
+</ng-container>
 <div id="youtube-player" style="display: none"></div>
 <div class="sticky">
     <div class="progress">
@@ -20,7 +22,7 @@
                 <div>{{formatTime(currentTime)}}</div>
                 <div>{{audio?.duration}}</div>
             </div>
-            <input type="range" [attr.max]="duration" [attr.value]="currentTime" (input)="seekAudio($event)" class="range purple" />
+            <input type="range" [max]="duration" [value]="currentTime" (input)="seekAudio($event)" class="range purple" />
         </div>
     </div>
     <div class="audio-player__music-player">
@@ -44,9 +46,6 @@
                 </ng-container>
             </button>
             <img src="assets/next.svg" (click)="nextTrack()">
-        </div>
-        <div class="controls">
-            
         </div>
     </div>
 </div>
