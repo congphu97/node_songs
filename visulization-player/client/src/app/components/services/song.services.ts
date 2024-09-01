@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment.prod';
-import { IAudio } from '../interfaces/audio.interface';
+import { IAudio, ILyrics } from '../interfaces/audio.interface';
 @Injectable({
   providedIn: 'root',
 })
@@ -23,5 +23,9 @@ export class SongService {
 
     getAudio(url: string) {
       return this.http.get<string>(`${this.url}/api/play?url=${url}`);
+    }
+
+    getLyrics(id: string) {
+      return this.http.get<ILyrics[]>(`${this.url}/api/get-lyrics?id=${id}`);
     }
 }

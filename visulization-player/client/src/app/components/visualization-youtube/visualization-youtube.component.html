@@ -1,16 +1,19 @@
 <ng-container *ngIf="isShowDetail">
     <div class="audio-player">
         <div class="container">
-            <div class="audio-player--visualize">
-                <div>
-                    <div class="audio-player__album">
-                        <img [src]="audio?.bestThumbnail?.url">
-                    </div>
-                    <div id="youtube-player" style="display: none"></div>
-                </div>
+            <div class="audio-player__album">
+                <img [src]="audio?.bestThumbnail?.url">
             </div>
-            <div class="audio-player__name">{{audio?.title}}</div>
+            <div id="youtube-player" style="display: none"></div>
+            <div class="audio-player__name">
+                <p>{{audio?.title}}</p>
+            </div>
             <div class="audio-player__artist">{{audio?.author?.name}}</div>
+            <div class="audio-player__list">
+                <ng-container *ngFor="let lyric of lyrics; let i = index">
+                    <div [ngStyle]="{ 'font-weight': onLyricsProgress(lyric, i) ? '700' : '500'}" (click)="seekAudioByLyric(lyric.start)">{{lyric?.text}}</div>
+                </ng-container>
+            </div>
         </div>
     </div>
 </ng-container>
@@ -22,7 +25,8 @@
                 <div>{{formatTime(currentTime)}}</div>
                 <div>{{audio?.duration}}</div>
             </div>
-            <input type="range" [max]="duration" [value]="currentTime" (input)="seekAudio($event)" class="range purple" />
+            <input type="range" [max]="duration" [value]="currentTime" (input)="seekAudio($event)"
+                class="range purple" />
         </div>
     </div>
     <div class="audio-player__music-player">
@@ -46,6 +50,15 @@
                 </ng-container>
             </button>
             <img src="assets/next.svg" (click)="nextTrack()">
+        </div>
+        <div class="settings" (click)="changeStatusPlayer()">
+            <div [ngSwitch]="currentPlayerStatus">
+                <div *ngSwitchCase="playerStatus.ONCE_PLAY"><img src="assets/repeat_one.svg" (click)="nextTrack()">
+                </div>
+                <div *ngSwitchCase="playerStatus.AUTO_NEXT"><img src="assets/repeat_random.svg" (click)="nextTrack()">
+                </div>
+                <div *ngSwitchCase="playerStatus.AUTO_REPEAT"><img src="assets/repeat.svg" (click)="nextTrack()"></div>
+            </div>
         </div>
     </div>
 </div>

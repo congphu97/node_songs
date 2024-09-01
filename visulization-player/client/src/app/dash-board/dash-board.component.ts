@@ -15,7 +15,6 @@ export class DashBoardComponent {
   constructor(private _songService: SongService) { }
 
   ngOnInit(): void {
-
   }
 
   searchChange(event: any) {

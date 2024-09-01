@@ -1,5 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { IonModal } from '@ionic/angular';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { IonModal, ModalController } from '@ionic/angular';
+import { IAudio } from '../interfaces/audio.interface';
 
 @Component({
   selector: 'app-visualization-album',
@@ -7,17 +8,20 @@ import { IonModal } from '@ionic/angular';
   styleUrls: ['./visualization-album.component.scss']
 })
 export class VisualizationAlbumComponent implements OnInit {
-  @ViewChild(IonModal) public modal!: IonModal;
 
-  message = 'This modal example uses triggers to automatically open a modal when the button is clicked.';
-  public name!: string;
+  @Input() public audio!: IAudio;
+  @Input() public audioItems: IAudio[] = [];
+
+  constructor(private modalCtrl: ModalController) {
+    console.log(this.audio)
+  }
 
   cancel() {
-    this.modal.dismiss(null, 'cancel');
+    this.modalCtrl.dismiss(null, 'cancel');
   }
 
   confirm() {
-    this.modal.dismiss(this.name, 'confirm');
+    this.modalCtrl.dismiss(null, 'confirm');
   }
   ngOnInit(): void {}
   onWillDismiss(event: Event) {

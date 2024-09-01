@@ -15,10 +15,12 @@
     .container {
         max-width: 500px;
         text-align: center;
+        height: 100%;
     }
 
     &__album {
         text-align: center;
+        height: 350px;
         img {
             width: 300px;
             height: 300px;
@@ -26,25 +28,54 @@
             object-fit: cover;
             animation: rotate 15s linear infinite;
             border: 10px solid white;
+            margin: 10px;
         }
     }
 
     &__name {
-        font-size: 32px;
+        font-size: 20px;
         font-weight: 600;
         color: white;
+        height: 30px;
+        background-color: black;
+        white-space: nowrap;
+        overflow: hidden;
+        box-sizing: border-box;
+
+        p {
+            margin: 0;
+            display: inline-block;
+            color: #FFF;
+            padding-left: 100%;
+            animation: move 10s linear infinite;
+        }
+
+        @keyframes move {
+            0%   { transform: translate(0, 0); }
+            100% { transform: translate(-100%, 0); }
+        }
     }
 
     &__artist {
         font-size: 20px;
         font-weight: 500;
         color: white;
+        height: 50px;
+    }
+
+    &__list {
+        color: white;
+        height: calc(100% - 450px);
+        overflow: auto;
+        margin-top: 10px;
     }
 
     &__music-player {
         display: grid;
         grid-template-columns: repeat(3, calc((100% / 3)));
         width: 100%;
+        align-items: center;
+        cursor: pointer;
 
         .info {
 
@@ -57,11 +88,6 @@
                 margin-right: 10px;
             }
         }
-
-        // .controls {
-        //     width: 100%;
-        //     text-align: center;
-        // }
 
         button {
             cursor: pointer;

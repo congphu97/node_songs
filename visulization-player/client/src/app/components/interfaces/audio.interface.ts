@@ -49,3 +49,9 @@ export interface IAudio {
     "duration": string,
     "uploadedAt": string,
 }
+
+export interface ILyrics {
+    dur: string;
+    start: string;
+    text: string;
+}

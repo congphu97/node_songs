@@ -8,7 +8,7 @@ const ffmpeg = require('fluent-ffmpeg');
 const fs = require('fs');
 const path = require('path');
 const ffmpegPath = require('ffmpeg-static');
-const { searchYouTube } = require('../services/youtube.services');
+const { searchYouTube, getLyrics } = require('../services/youtube.services');
 const mp3Directory = path.join(__dirname, './../../assets');
 const { PassThrough } = require('stream');
 const app = express();
@@ -199,7 +199,7 @@ router.get('/api/proxy/*', (req, res) => {
 
 router.get('/api/search', async (req, res) => {
   try {
-    const keyword = req.query.keyword;
+    const keyword = req.query.keyword.toLowerCase();
     if (!keyword) {
       return res.status(400).json({ error: 'Keyword query parameter is required' });
     }
@@ -212,9 +212,24 @@ router.get('/api/search', async (req, res) => {
   }
 });
 
-// app.listen(port, () => {
-//   console.log(`Server running on http://localhost:${port}`);
-// });
+router.get('/api/get-lyrics',  async (req, res) => {
+  try {
+    const keyword = req.query.id;
+    if (!keyword) {
+      return res.status(400).json({ error: 'Keyword query parameter is required' });
+    }
+
+    const data = await getLyrics(keyword);
+    res.json(data);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'An error occurred while searching for songs' });
+  }
+})
+
+app.listen(port, () => {
+  console.log(`Server running on http://localhost:${port}`);
+});
 
 app.use('/', router);
 

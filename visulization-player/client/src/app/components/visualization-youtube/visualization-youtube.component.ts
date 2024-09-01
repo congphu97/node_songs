@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { IAudio } from '../interfaces/audio.interface';
+import { IAudio, ILyrics } from '../interfaces/audio.interface';
 import { SongService } from '../services/song.services';
+import { PLAYER_STATUS } from '../enums/audio.enum';
 
 @Component({
   selector: 'app-visualization-youtube',
@@ -9,6 +10,8 @@ import { SongService } from '../services/song.services';
 })
 export class VisualizationYoutubeComponent {
 
+  @Input() audio!: IAudio;
+  @Input() audioItems: IAudio[] = [];
   @Input() audioUrl: string | undefined;
   @Input() isShowDetail!: boolean;
 
@@ -16,17 +19,18 @@ export class VisualizationYoutubeComponent {
   public currentTime: number = 0;
   public isPlaying = false;
   public volume = 100;
-  public audio!: IAudio;
+  public playerStatus  = PLAYER_STATUS;
+  public currentPlayerStatus: number = 0;
+  public lyrics: ILyrics[] = [];
+
   private player: YT.Player | undefined;
 
   constructor(private _songService: SongService) { }
 
   ngOnInit(): void {
-    // Check if the YouTube API script is already loaded
     if (!YT) {
       this.onYouTubeIframeAPIReady();
     } else {
-      // Load the YouTube API script
       const script = document.createElement('script');
       script.src = 'https://www.youtube.com/iframe_api';
       document.body.appendChild(script);
@@ -34,33 +38,27 @@ export class VisualizationYoutubeComponent {
       script.onerror = () => console.error('Failed to load YouTube API script');
     }
 
-    this._songService.currentAudio$.pipe()
-      .subscribe((audio) => {
-        if (audio) {
-          this.audio = audio;
-          this.duration = 0;
-          this.currentTime = 0;
-          if (this.player) {
-            this.player.loadVideoById(this.audio.id);
-            this.isPlaying = true;
-          } else {
-            this.onYouTubeIframeAPIReady();
-          }
-        }
-      });    this._songService.currentAudio$.pipe()
-      .subscribe((audio) => {
-        if (audio) {
-          this.audio = audio;
-          this.duration = 0;
-          this.currentTime = 0;
-          if (this.player) {
-            this.player.loadVideoById(this.audio.id);
-            this.isPlaying = true;
-          } else {
-            this.onYouTubeIframeAPIReady();
-          }
-        }
-      });
+    // this._songService.currentAudio$.pipe()
+    //   .subscribe((audio) => {
+    //     if (audio) {
+    //       console.log({audio})
+    //       this.audio = audio;
+    //       this.duration = 0;
+    //       this.currentTime = 0;
+    //       if (this.player) {
+    //         this.player.loadVideoById(this.audio.id);
+    //         this.isPlaying = true;
+    //       } else {
+    //         this.onYouTubeIframeAPIReady();
+    //       }
+    //     }
+    //   });
+
+    this._songService.getLyrics(this.audio.id).subscribe((rs) => {
+      console.log(rs);
+      this.lyrics = rs;
+    })
+
   }
 
   ngOnDestroy(): void {
@@ -73,9 +71,9 @@ export class VisualizationYoutubeComponent {
     this.player = new YT.Player('youtube-player', {
       height: '390',
       width: '640',
-      videoId: '', // Example video ID
+      videoId: this.audio.id,
       playerVars: {
-        'autoplay': 1,  // Autoplay the video
+        'autoplay': 1,
       },
       events: {
         'onReady': this.onPlayerReady.bind(this),
@@ -86,8 +84,20 @@ export class VisualizationYoutubeComponent {
 
   onPlayerReady(event: YT.PlayerEvent): void {
     console.log('Player ready', event);
-
+    this.isPlaying = true;
   }
+
+  onLyricsProgress(lyric: ILyrics, index: number) {
+    const { start, dur } = lyric;
+
+    return this.currentTime >= Number(this.formatTimestampMMSS(Number(start))) && this.currentTime <= Number(this.formatTimestampMMSS(Number(start) + Number(dur)));
+  }
+
+  formatTimestampMMSS(seconds: number) {
+    const minutes = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+    return `${secs.toString().padStart(2, '0')}`;
+}
 
   onPlayerStateChange(event: YT.OnStateChangeEvent): void {
     console.log('Player state changed: ', event);
@@ -133,6 +143,15 @@ export class VisualizationYoutubeComponent {
     }
   }
 
+  seekAudioByLyric(timeLyric: string) {
+    const time = Number(timeLyric);
+
+    if (this.player) {
+      this.player.seekTo(time, true);
+      this.currentTime = time;
+    }
+  }
+
   formatTime(seconds: number): string {
     const minutes = Math.floor(seconds / 60);
     const secs = Math.floor(seconds % 60);
@@ -144,11 +163,21 @@ export class VisualizationYoutubeComponent {
     this.isPlaying = !this.isPlaying;
   }
 
-  nextTrack() { }
+  nextTrack() {
+    console.log(this.audioItems)
+    // this.player.load
+   }
   prevTrack() { }
 
   setVolume(volumne: number) {
     this.player?.setVolume(volumne);
+  }
+
+  changeStatusPlayer() {
+    if ( this.currentPlayerStatus == 2 ) this.currentPlayerStatus = -1;
+
+    this.currentPlayerStatus += 1;
+    console.log(this.currentPlayerStatus)
   }
 
 }
