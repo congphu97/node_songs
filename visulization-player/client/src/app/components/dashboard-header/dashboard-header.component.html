@@ -1,0 +1,46 @@
+<div class="container" >
+    <div class="dashboard__header">
+        <p class="page-name">SoundTune Music</p>
+        <div class="group-tab">
+            <a href="" class="group-tab__home">Home</a>
+            <a href="" class="group-tab__feed">Feed</a>
+            <a href="" class="group-tab__library">Library</a>
+        </div>
+        <div class="search">
+            <input class="search__input" placeholder="Search...." [(ngModel)]="search" (change)="searchChange($event)">
+        </div>
+        <div class="trial">
+            <a href="" class="trial__button">Try Next Pro</a>
+        </div>
+        <div class="artists">
+            <a href="" class="artists__button">For Artists</a>
+        </div>
+        <div class="upload">
+            <a href="" class="upload__button">Upload</a>
+        </div>
+        <div class="user">
+            <div class="user__avatar"></div>
+            <ul class="user__sub-menu">
+                <li class="user__tab"> <img class="user__icon-menu" src="../../../assets/person.svg"><a class="user__name-menu" href="#">Profile</a></li>
+                <li class="user__tab"> <img class="user__icon-menu" src="../../../assets/heart.svg"><a class="user__name-menu" href="#">Likes</a></li>
+                <li class="user__tab"> <img class="user__icon-menu" src="../../../assets/radio.svg"><a class="user__name-menu" href="#">Stations</a></li>
+              </ul>
+        </div>
+          
+        <div class="noti-group">
+            <div class="notification">
+                <img class="notification__icon" src="../../../assets/notifications.svg">
+    
+            </div>
+            <div class="mail">
+                <img class="mail__icon" src="../../../assets/mail.svg">
+    
+            </div>
+            <div class="more">
+                <img class="more__icon" src="../../../assets/ellipsis-horizontal.svg">
+                
+            </div>
+        </div>
+    </div>
+</div>
+
