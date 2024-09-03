@@ -28,7 +28,7 @@ module.exports.getLyrics = async function(videoId) {
             console.log(`No captions available for video ${videoId} in language ${lang}`);
             return null;
         }
-
+        console.log({subtitles})
         return subtitles;
     } catch (error) {
         console.error('Error fetching captions:', error);
