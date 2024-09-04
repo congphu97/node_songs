@@ -15,6 +15,7 @@ import { VisualizationControlsComponent } from './components/visualization-contr
 import { VisualizationYoutubeComponent } from './components/visualization-youtube/visualization-youtube.component';
 import { VisualizationAlbumComponent } from './components/visualization-album/visualization-album.component';
 import { IonicModule } from '@ionic/angular';
+import { DashBoardHeaderComponent } from './components/dashboard-header/dashboard-header.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { IonicModule } from '@ionic/angular';
     VisualizationSpacemanComponent,
     MusicItemsComponent,
     DashBoardComponent,
+    DashBoardHeaderComponent,
     VisualizationControlsComponent,
     VisualizationYoutubeComponent,
     VisualizationAlbumComponent,
@@ -34,9 +36,9 @@ import { IonicModule } from '@ionic/angular';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    IonicModule.forRoot()  // Initialize Ionic,
+    IonicModule.forRoot(), // Initialize Ionic,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
