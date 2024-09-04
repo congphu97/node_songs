@@ -1,10 +1,5 @@
 <div class="dashboard">
-    <div class="dashboard__header">
-        <p>Visualization Music</p>
-        <div class="search">
-            <input class="search__input" placeholder="Search...." [(ngModel)]="search" (change)="searchChange($event)">
-        </div>
-    </div>
+    <app-dashboard-header ></app-dashboard-header>
     <div class="dashboard__list">
         <ng-container *ngIf="audioItems?.length">
             <app-music-items [audioItems]="audioItems"></app-music-items>
