@@ -11,18 +11,16 @@
       .page-name {
       }
       width: 1240px;
-      display: flex;
-
       height: 46px;
+      display: flex;
 
       align-items: center;
       justify-content: space-between;
-      // padding: 0px 220px;
 
       color: white;
-      font-family: Inter, sans-serif;
+      font-family: "Lexend";
       font-weight: 500;
-      font-size: 15px;
+      font-size: 14px;
       line-height: 1.5;
 
       @media (max-width: 1235px) {
