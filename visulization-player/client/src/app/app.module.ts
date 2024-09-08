@@ -16,6 +16,8 @@ import { VisualizationYoutubeComponent } from './components/visualization-youtub
 import { VisualizationAlbumComponent } from './components/visualization-album/visualization-album.component';
 import { IonicModule } from '@ionic/angular';
 import { DashBoardHeaderComponent } from './components/dashboard-header/dashboard-header.component';
+import { MainView } from './components/main-view/main-view.component';
+import { ListSong } from './components/list-song/list-song.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +32,8 @@ import { DashBoardHeaderComponent } from './components/dashboard-header/dashboar
     VisualizationControlsComponent,
     VisualizationYoutubeComponent,
     VisualizationAlbumComponent,
+    MainView,
+    ListSong,
   ],
   imports: [
     BrowserModule,
