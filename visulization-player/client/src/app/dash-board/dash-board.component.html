@@ -1,13 +1,20 @@
 <div class="dashboard">
     <app-dashboard-header ></app-dashboard-header>
-    <div class="dashboard__list">
+    <!-- <div class="dashboard__list">
         <ng-container *ngIf="audioItems?.length">
             <app-music-items [audioItems]="audioItems"></app-music-items>
         </ng-container>
         <div *ngIf="!audioItems?.length" class="dashboard__not-found">
             <div class="dashboard__intro">Search to play the song. This is the beta version</div>
         </div>
+    </div> -->
+  <div class="dashboard__wrapper-body">
+    <div class="dashboard__body" >
+        <app-main-view></app-main-view>
+        <app-list-song></app-list-song>
     </div>
+  </div>
+
     <div class="dashboard__player">
         <!-- <app-visualization-youtube></app-visualization-youtube> -->
         <!-- <app-visualization-album></app-visualization-album> -->
