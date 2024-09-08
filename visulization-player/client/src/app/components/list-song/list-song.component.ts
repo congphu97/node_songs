@@ -5,8 +5,8 @@ import { Component } from '@angular/core';
   templateUrl: './list-song.html',
   styleUrls: ['./list-song.scss'],
 })
-export class ListSong {
-  isOpenMenuMore: boolean = false;
+export class ListSongComponent {
+  public isOpenMenuMore: boolean = false;
 
   handleClickOpenMenu() {
     this.isOpenMenuMore = !this.isOpenMenuMore;

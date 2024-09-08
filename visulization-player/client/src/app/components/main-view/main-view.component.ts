@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
   templateUrl: './main-view.html',
   styleUrls: ['./main-view.scss'],
 })
-export class MainView {
+export class MainViewComponent {
   constructor() {}
 
   ngOnInit(): void {}
