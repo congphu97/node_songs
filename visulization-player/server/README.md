@@ -11,4 +11,10 @@ Command:
 // docker run -d -p [HOST_PORT]:[CONTAINER_PORT] [IMAGE_ID]: Add port access to docker image (8000:3000)
 // docker image inspect [CONTAINER_ID]: Check information image
 // docker cp client/assets/. server/assets/.  : Coppy file assets from client to container server.
-// 
+ 
+
+// Run build Tag image: docker build -t container_demo:lastest .
+// Sharing image:  Share dockerfile + Push docker hub
+// Login docker hub from local: docker login
+
+Managing data in images & container
