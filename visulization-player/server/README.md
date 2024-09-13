@@ -18,3 +18,14 @@ Command:
 // Login docker hub from local: docker login
 
 Managing data in images & container
+1. Create image: docker build -t music_node:volumes .
+2. Create volume: docker volume create music_node_volume
+3. Run docker with volume anonymous /app/music : docker run -d -p 8000:3000 --rm --name music_node -v music_node:/app/music music_node:volumes  
+3. Run docker with volume path source: docker run -d -p 8000:3000 --rm --name music_node -v "C:/Users/pc/Desktop/front-end/node_songs/visulization-player/server:/app/music" music_node:volumes
+4. Combine & Merging Different Volumne: docker run -d -p 8000:3000 --rm --name music_node -v "C:/Users/pc/Desktop/front-end/node_songs/visulization-player/server:/app/music" -v /app/node_moduldes/ music_node:volumes
+5. View logs: docker logs music_node
+
+Volumes & Bind Mounts:
+1. Readoly volume: add :ro (ex: docker run -d -p 8000:3000 --rm --name music_node -v "C:/Users/pc/Desktop/front-end/node_songs/visulization-player/server:/app/music:ro" -v /app/node_moduldes/ music_node:volumes)
+
+2.
