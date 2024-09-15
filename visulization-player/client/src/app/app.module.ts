@@ -18,7 +18,7 @@ import { IonicModule } from '@ionic/angular';
 import { DashBoardHeaderComponent } from './components/dashboard-header/dashboard-header.component';
 import { MainViewComponent } from './components/main-view/main-view.component';
 import { ListSongComponent } from './components/list-song/list-song.component';
-
+import { BottomComponent } from './components/bottom/bottom.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,6 +34,7 @@ import { ListSongComponent } from './components/list-song/list-song.component';
     VisualizationAlbumComponent,
     MainViewComponent,
     ListSongComponent,
+    BottomComponent
   ],
   imports: [
     BrowserModule,

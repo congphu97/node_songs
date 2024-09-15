@@ -20,4 +20,10 @@ export class DashBoardComponent {
   searchChange(event: any) {
     this._songService.getListAudio(event.target.value).subscribe((rs) => this.audioItems = rs );
   }
+
+  onSearchResults(audioItems: IAudio[]) {
+    console.log('========>>> audioItems', audioItems)
+    this.audioItems = audioItems;
+  }
+  
 }
