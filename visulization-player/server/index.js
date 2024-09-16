@@ -13,6 +13,7 @@ const mp3Directory = path.join(__dirname, './../../assets');
 const { PassThrough } = require('stream');
 const app = express();
 const port = process.env.PORT || 3000;
+const corsAnywhere = require('cors-anywhere');
 // Path to ffmpeg binary
 app.use(cors());
 app.use(express.json());
