@@ -73,6 +73,43 @@ router.get('/api/search', async (req, res) => {
   }
 });
 
+
+// CORS Anywhere setup
+const corsProxy = corsAnywhere.createServer({
+  originWhitelist: [], // Allow all origins
+  requireHeader: [],
+  removeHeaders: ['cookie', 'cookie2'],
+});
+
+// Use /cors for CORS proxying
+router.use('/cors/', (req, res) => {
+  corsProxy.emit('request', req, res);
+});
+
+// Endpoint to stream audio from YouTube
+router.get('/stream', async (req, res) => {
+  const videoUrl = req.query.url; // YouTube URL passed as query parameter
+
+  if (!videoUrl || !ytdl.validateURL(videoUrl)) {
+    return res.status(400).send('Invalid or missing YouTube URL');
+  }
+
+  try {
+    // Set response headers to indicate audio file download
+    res.setHeader('Content-Type', 'audio/mpeg');
+
+    // Stream only audio from the YouTube video
+    ytdl(videoUrl, {
+      filter: 'audioonly',
+      quality: 'highestaudio',
+    }).pipe(res);
+
+  } catch (err) {
+    console.error('Error streaming audio:', err);
+    res.status(500).send('Error streaming audio');
+  }
+});
+
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
