@@ -1,0 +1,12 @@
+.bottom-component{
+    font-family: "Lexend";
+    &__container{
+        position: fixed;
+        bottom: 0;
+        text-align: center;
+        width: 100%;
+        background-color: #f50;
+        color: white;
+        padding: 10px 20px;
+    }
+}
