@@ -13,6 +13,7 @@ const mp3Directory = path.join(__dirname, './../../assets');
 const { PassThrough } = require('stream');
 const app = express();
 const port = process.env.PORT || 3000;
+const corsAnywhere = require('cors-anywhere');
 // Path to ffmpeg binary
 app.use(cors());
 app.use(express.json());
@@ -70,6 +71,43 @@ router.get('/api/search', async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'An error occurred while searching for songs' });
+  }
+});
+
+
+// CORS Anywhere setup
+const corsProxy = corsAnywhere.createServer({
+  originWhitelist: [], // Allow all origins
+  requireHeader: [],
+  removeHeaders: ['cookie', 'cookie2'],
+});
+
+// Use /cors for CORS proxying
+router.use('/cors/', (req, res) => {
+  corsProxy.emit('request', req, res);
+});
+
+// Endpoint to stream audio from YouTube
+router.get('/stream', async (req, res) => {
+  const videoUrl = req.query.url; // YouTube URL passed as query parameter
+
+  if (!videoUrl || !ytdl.validateURL(videoUrl)) {
+    return res.status(400).send('Invalid or missing YouTube URL');
+  }
+
+  try {
+    // Set response headers to indicate audio file download
+    res.setHeader('Content-Type', 'audio/mpeg');
+
+    // Stream only audio from the YouTube video
+    ytdl(videoUrl, {
+      filter: 'audioonly',
+      quality: 'highestaudio',
+    }).pipe(res);
+
+  } catch (err) {
+    console.error('Error streaming audio:', err);
+    res.status(500).send('Error streaming audio');
   }
 });
 

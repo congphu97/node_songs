@@ -3,44 +3,58 @@
         <p class="view-all__text"> <img class="more__icon view-all__icon" src="assets/wish-list.webp">Favorite List</p>
         <a href="" class="view-all__button">View all</a>
     </div>
-    <div class="list-song__song song">
-       <div class="song__container container">
-        <img class="container__image" src="https://avatarfiles.alphacoders.com/189/thumb-1920-189957.jpg"> 
-       <p class="container__play-span"> <img class="song__play-image" src="assets/play.png"></p>
-       </div>
-        <div class="song__group-info">
-               <div class="song__title">
-                <p class="song__name">song</p>
-                <div class="song__detail detail">
-                    <img class="detail__image" src="https://avatarfiles.alphacoders.com/189/thumb-1920-189957.jpg">
-                    <div class="detail__info">
-                        <p class="detail__name">Name</p>
-                        <p class="detail__follower"><img class="detail__image-follower" src="assets/person.svg"> 23</p>
-                        <p class="detail__location">HCM, Vietnam</p>
-                        <p class="detail__button-follow"><img class="detail__image-follower" src="assets/person.svg"> Follow</p>
+    <div class="list-song__container">
+        <div class="list-song__song song" *ngFor="let item of wishList">
+            <div class="song__container container">
+                <img class="container__image" src="https://avatarfiles.alphacoders.com/189/thumb-1920-189957.jpg">
+                <p class="container__play-span"> <img class="song__play-image" src="assets/play.png"></p>
+            </div>
+            <div class="song__group-info">
+                <div class="song__title">
+                    <p class="song__name">{{item.title}}</p>
+                    <div class="song__detail detail">
+                        <img class="detail__image" src="https://avatarfiles.alphacoders.com/189/thumb-1920-189957.jpg">
+                        <div class="detail__info">
+                            <p class="detail__name">Name</p>
+                            <p class="detail__follower"><img class="detail__image-follower" src="assets/person.svg"> 23
+                            </p>
+                            <p class="detail__location">HCM, Vietnam</p>
+                            <p class="detail__button-follow"><img class="detail__image-follower"
+                                    src="assets/person.svg">
+                                Follow</p>
+                        </div>
                     </div>
                 </div>
-               </div>
-                <p class="song__actor">Actor</p>
-        <div class="song__interaction interaction">
-            <p class="interaction__views"> <img class="interaction__image" src="assets/play.png">99.99k</p>
-            <a href="" class="interaction__button"> <img class="interaction__image" src="assets/wish-heart.png">333</a>
-            <a href="" class="interaction__button"><img class="interaction__image" src="assets/reposts.png">12</a>
-            <a href="" class="interaction__button"><img class="interaction__image" src="assets/comments.png">18</a>
-        </div>
-        </div>
-        <div class="song__songs-button songs-button" >
-            <span  class="songs-button__image-heart--border"><img class="songs-button__image" src="assets/wish-heart.png"></span>
-          <div>
-            <span (click)="handleClickOpenMenu()"  [ngClass]="isOpenMenuMore ? 'songs-button__image-more--border--active':'songs-button__image-more--border'"><img class="songs-button__image" src="assets/ellipsis-horizontal.svg"></span>
-            <ul class="songs-button__menu-more" *ngIf="isOpenMenuMore">
-                <li class="songs-button__menu-elements"><img class="songs-button__image-menu" src="assets/reposts.png">Repost</li>
-                <li class="songs-button__menu-elements"><img class="songs-button__image-menu" src="assets/share.png">Share</li>
-                <li class="songs-button__menu-elements"><img class="songs-button__image-menu" src="assets/copy-link.jpg">Copy Link</li>
-            </ul>
-          </div>
+                <p class="song__actor">{{item.author}}</p>
+                <div class="song__interaction interaction">
+                    <p class="interaction__views"> <img class="interaction__image"
+                            src="assets/play.png">{{handleUnitThousand(item.views)}}
+                    </p>
+                    <a href="" class="interaction__button"> <img class="interaction__image"
+                            src="assets/wish-heart.png">{{handleUnitThousand(item.like)}}</a>
+                    <a href="" class="interaction__button"><img class="interaction__image"
+                            src="assets/reposts.png">{{handleUnitThousand(item.repost)}}</a>
+                    <a href="" class="interaction__button"><img class="interaction__image"
+                            src="assets/comments.png">{{handleUnitThousand(item.comment)}}</a>
+                </div>
+            </div>
+            <div class="song__songs-button songs-button">
+                <span class="songs-button__image-heart--border"><img class="songs-button__image"
+                        src="assets/wish-heart.png"></span>
+                <div>
+                    <span (click)="handleClickOpenMenu()"
+                        [ngClass]="isOpenMenuMore ? 'songs-button__image-more--border--active':'songs-button__image-more--border'"><img
+                            class="songs-button__image" src="assets/ellipsis-horizontal.svg"></span>
+                    <ul class="songs-button__menu-more" *ngIf="isOpenMenuMore">
+                        <li class="songs-button__menu-elements"><img class="songs-button__image-menu"
+                                src="assets/reposts.png">Repost</li>
+                        <li class="songs-button__menu-elements"><img class="songs-button__image-menu"
+                                src="assets/share.png">Share</li>
+                        <li class="songs-button__menu-elements"><img class="songs-button__image-menu"
+                                src="assets/copy-link.jpg">Copy Link</li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
 </div>
-
-

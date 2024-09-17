@@ -1,7 +1,8 @@
 <div class="audio-container">
     <ng-container *ngFor="let item of audioItems">
         <div class="audio-item" (click)="playSong(item)">
-            <img [src]="item.bestThumbnail.url"/>
+            <img [src]="item.bestThumbnail.url" />
+            <p class="audio-item__button-play"> <img class="audio-item__image-play" src="assets/play.png"></p>
             <div class="audio-item__description description">
                 <div class="description__title">{{item.title}}</div>
                 <div class="description__authur">{{item.author.name}}</div>
