@@ -8,7 +8,7 @@ const ffmpeg = require('fluent-ffmpeg');
 const fs = require('fs');
 const path = require('path');
 const ffmpegPath = require('ffmpeg-static');
-const { searchYouTube } = require('./netlify/services/youtube.services');
+const { searchYouTube, getLyrics } = require('./netlify/services/youtube.services');
 const mp3Directory = path.join(__dirname, './../../assets');
 const { PassThrough } = require('stream');
 const app = express();
@@ -42,6 +42,22 @@ app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   next();
 });
+
+
+router.get('/api/get-lyrics',  async (req, res) => {
+  try {
+    const keyword = req.query.id;
+    if (!keyword) {
+      return res.status(400).json({ error: 'Keyword query parameter is required' });
+    }
+
+    const data = await getLyrics(keyword);
+    res.json(data);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'An error occurred while searching for songs' });
+  }
+})
 
 // Function to get the audio URL from a YouTube video
 async function getAudioUrl(videoUrl) {
