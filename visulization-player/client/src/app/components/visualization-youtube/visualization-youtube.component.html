@@ -11,7 +11,7 @@
             <div class="audio-player__artist">{{audio?.author?.name}}</div>
             <div class="audio-player__list">
                 <ng-container *ngFor="let lyric of lyrics; let i = index">
-                    <div [ngStyle]="{ 'font-weight': onLyricsProgress(lyric, i) ? '700' : '500'}" (click)="seekAudioByLyric(lyric.start)">{{lyric?.text}}</div>
+                    <div [ngStyle]="onLyricsProgress(lyric, i)" (click)="seekAudioByLyric(lyric.start)">{{lyric?.text}}</div>
                 </ng-container>
             </div>
         </div>

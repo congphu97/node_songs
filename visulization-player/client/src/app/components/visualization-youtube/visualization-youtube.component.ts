@@ -89,8 +89,9 @@ export class VisualizationYoutubeComponent {
 
   onLyricsProgress(lyric: ILyrics, index: number) {
     const { start, dur } = lyric;
+    const inDuringtime: boolean = (Number(this.currentTime) >=(Number(start))) &&( Number(this.currentTime) <= (Number(start) + Number(dur)));
 
-    return this.currentTime >= Number(this.formatTimestampMMSS(Number(start))) && this.currentTime <= Number(this.formatTimestampMMSS(Number(start) + Number(dur)));
+    return inDuringtime ? { 'font-weight': 700, color: 'yellow'} : { 'font-weight': 500, color: 'white'}
   }
 
   formatTimestampMMSS(seconds: number) {
@@ -145,11 +146,13 @@ export class VisualizationYoutubeComponent {
 
   seekAudioByLyric(timeLyric: string) {
     const time = Number(timeLyric);
+    console.log(this.currentTime,timeLyric, this.formatTimestampMMSS(Number(timeLyric)))
 
     if (this.player) {
       this.player.seekTo(time, true);
       this.currentTime = time;
     }
+
   }
 
   formatTime(seconds: number): string {

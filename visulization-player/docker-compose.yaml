@@ -1,0 +1,46 @@
+version: "3.8" # version syntax docker file
+services:
+    mongodb:
+        image: 'mongo' # Craete image with name 'mongo'
+        volumes: # Create volumne
+            - data:/data/db:
+        container_name: mongodb
+        # Config environment:
+        # Solution 1:
+        # environment:
+        #     MONGO_INITDB_ROOT_USERNAME: username
+        #     MONGO_INITDB_ROOT_PASSWWORD: password
+        #Solution 2: (Recommend)
+        env_file:
+        - ./env/mongo.env
+    # Config backend and build
+    backend:
+        build: ./server
+        # build:
+        #     context: ./server # Direction path have docker file and docker-compose file
+        #     dockerfile: Dockerfile # Read Dockerfile
+        ports:
+            - '3000:3000'
+        volumes:
+            - logs:/app/logs
+            - ./server:/app
+            - /app/node_modules
+        container_name: backend
+        env_file:
+            - ./env/server.env
+        depends_on:
+            - mongodb # wait service mongodb run finish
+    frontend:
+        build: ./client
+        ports:
+            - '4200:4200'
+        volumes:
+            - ./client/src:/app/src
+        container_name: frontend
+        stdin_open: true
+        tty: true # Command terminal
+        depends_on:
+            - backend
+volumes: # Share volumnes for muti-container
+    data:
+    logs:

@@ -1,4 +1,4 @@
-require('dotenv').config();
+// require('dotenv').config();
 
 const express = require('express');
 const serverless = require('serverless-http');
@@ -8,11 +8,12 @@ const ffmpeg = require('fluent-ffmpeg');
 const fs = require('fs');
 const path = require('path');
 const ffmpegPath = require('ffmpeg-static');
-const { searchYouTube } = require('./netlify/services/youtube.services');
+const { searchYouTube, getLyrics } = require('./netlify/services/youtube.services');
 const mp3Directory = path.join(__dirname, './../../assets');
 const { PassThrough } = require('stream');
 const app = express();
 const port = process.env.PORT || 3000;
+const corsAnywhere = require('cors-anywhere');
 // Path to ffmpeg binary
 app.use(cors());
 app.use(express.json());
@@ -42,6 +43,22 @@ app.use((req, res, next) => {
   next();
 });
 
+
+router.get('/api/get-lyrics',  async (req, res) => {
+  try {
+    const keyword = req.query.id;
+    if (!keyword) {
+      return res.status(400).json({ error: 'Keyword query parameter is required' });
+    }
+
+    const data = await getLyrics(keyword);
+    res.json(data);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'An error occurred while searching for songs' });
+  }
+})
+
 // Function to get the audio URL from a YouTube video
 async function getAudioUrl(videoUrl) {
   try {
@@ -70,6 +87,43 @@ router.get('/api/search', async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'An error occurred while searching for songs' });
+  }
+});
+
+
+// CORS Anywhere setup
+const corsProxy = corsAnywhere.createServer({
+  originWhitelist: [], // Allow all origins
+  requireHeader: [],
+  removeHeaders: ['cookie', 'cookie2'],
+});
+
+// Use /cors for CORS proxying
+router.use('/cors/', (req, res) => {
+  corsProxy.emit('request', req, res);
+});
+
+// Endpoint to stream audio from YouTube
+router.get('/stream', async (req, res) => {
+  const videoUrl = req.query.url; // YouTube URL passed as query parameter
+
+  if (!videoUrl || !ytdl.validateURL(videoUrl)) {
+    return res.status(400).send('Invalid or missing YouTube URL');
+  }
+
+  try {
+    // Set response headers to indicate audio file download
+    res.setHeader('Content-Type', 'audio/mpeg');
+
+    // Stream only audio from the YouTube video
+    ytdl(videoUrl, {
+      filter: 'audioonly',
+      quality: 'highestaudio',
+    }).pipe(res);
+
+  } catch (err) {
+    console.error('Error streaming audio:', err);
+    res.status(500).send('Error streaming audio');
   }
 });
 
