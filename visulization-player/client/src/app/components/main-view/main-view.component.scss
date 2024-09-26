@@ -1,18 +1,15 @@
 .main-view {
   height: 700px;
-  width: 819px;
   padding: 0px 0px 30px 0px;
   border-right: 1px solid #f1f1f1;
-  &__container{
+  &__container {
     height: 100%;
-  overflow: auto;
+    overflow: auto;
 
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* Internet Explorer 10+ */
-
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
   }
   &__container::-webkit-scrollbar {
     display: none; //other
   }
 }
-
