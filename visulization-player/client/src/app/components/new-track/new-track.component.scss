@@ -1,0 +1,33 @@
+p {
+  margin: 0px;
+}
+
+.new-track {
+  font-weight: 600;
+
+  &__container {
+    margin-top: 20px;
+    width: 100%;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  &__list {
+    display: flex;
+    gap: 13px;
+    .list {
+      &__item {
+        display: flex;
+        flex-direction: column;
+        min-width: 100px;
+        align-items: center;
+        gap: 10px;
+      }
+      &__item-image {
+        height: 80px;
+        width: 80px;
+        border-radius: 50%;
+      }
+    }
+  }
+}

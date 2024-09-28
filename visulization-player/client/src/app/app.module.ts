@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
@@ -19,6 +19,12 @@ import { DashBoardHeaderComponent } from './components/dashboard-header/dashboar
 import { MainViewComponent } from './components/main-view/main-view.component';
 import { ListSongComponent } from './components/list-song/list-song.component';
 import { BottomComponent } from './components/bottom/bottom.component';
+import { TabMenuMobile } from './components/tab-bottom/tab-menu.component';
+import { NewTrackComponent } from './components/new-track/new-track.component';
+import { NewTrackModule } from './components/new-track/new-track.module';
+import { RecentlyPlayedComponent } from './components/recently-played/recently-played.component';
+// import { DashBoardModule } from './dash-board/dash-board.module';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,7 +40,9 @@ import { BottomComponent } from './components/bottom/bottom.component';
     VisualizationAlbumComponent,
     MainViewComponent,
     ListSongComponent,
-    BottomComponent
+    BottomComponent,
+    TabMenuMobile,
+    RecentlyPlayedComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,6 +50,8 @@ import { BottomComponent } from './components/bottom/bottom.component';
     FormsModule,
     HttpClientModule,
     IonicModule.forRoot(), // Initialize Ionic,
+    NewTrackModule,
+    // DashBoardModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -1,5 +1,10 @@
 <div class="dashboard">
     <app-dashboard-header (audioItems)="onSearchResults($event)"></app-dashboard-header>
+
+
+
+     <!-- <check-navigate-tab></check-navigate-tab> -->
+
     <!-- <div class="dashboard__list">
         <ng-container *ngIf="audioItems?.length">
             <app-music-items [audioItems]="audioItems"></app-music-items>
@@ -9,7 +14,9 @@
         </div>
     </div> -->
     <div class="dashboard__wrapper-body">
-        <div class="dashboard__body">
+        <div class="dashboard__container">
+          
+            
             <app-main-view [audioItems]="audioItems"></app-main-view>
             <app-list-song></app-list-song>
         </div>
