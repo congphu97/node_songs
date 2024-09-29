@@ -62,5 +62,14 @@ Containers & Networks:
 Build multi-container application with Docker:
 
 Using docker-compose:
-    docker-compose up -d
-    docker-compose down -v
+    docker-compose up -d: Run docker compose
+    docker-compose down -v: Stop docker compose
+
+
+k8s:
+1. Build docker imagae: kub-first-app
+2. Create new : kubectl create deployment first-app --image=kub-first-app
+3. Get all : kubectl get deployments
+4. Get pods: kubectl get pods
+5. delete: kubectl delete deployment first-app
+6. run minikube dashboard: minikube dashboard
