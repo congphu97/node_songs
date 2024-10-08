@@ -21,9 +21,8 @@ import { ListSongComponent } from './components/list-song/list-song.component';
 import { BottomComponent } from './components/bottom/bottom.component';
 import { TabMenuMobile } from './components/tab-bottom/tab-menu.component';
 import { NewTrackComponent } from './components/new-track/new-track.component';
-import { NewTrackModule } from './components/new-track/new-track.module';
 import { RecentlyPlayedComponent } from './components/recently-played/recently-played.component';
-// import { DashBoardModule } from './dash-board/dash-board.module';
+import { UserDetailComponent } from './components/user-detail/user-detail.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +42,8 @@ import { RecentlyPlayedComponent } from './components/recently-played/recently-p
     BottomComponent,
     TabMenuMobile,
     RecentlyPlayedComponent,
+    NewTrackComponent,
+    UserDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -50,10 +51,8 @@ import { RecentlyPlayedComponent } from './components/recently-played/recently-p
     FormsModule,
     HttpClientModule,
     IonicModule.forRoot(), // Initialize Ionic,
-    NewTrackModule,
-    // DashBoardModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

@@ -5,6 +5,7 @@ p {
 .recently-played {
   font-weight: 600;
   font-size: 20px;
+
   &__container {
     margin-top: 20px;
     width: 100%;
@@ -15,6 +16,8 @@ p {
   &__list {
     display: flex;
     gap: 13px;
+    position: relative;
+
     .list {
       &__item {
         display: flex;
@@ -22,16 +25,57 @@ p {
         min-width: 100px;
         align-items: center;
         gap: 10px;
+        position: relative;
+
+        &:hover {
+          .list__play-button {
+            display: flex;
+          }
+        }
       }
+
       &__item-image {
         height: 120px;
         width: 120px;
         border-radius: 5px;
         border: 1px solid #c8c8c8;
+        cursor: pointer;
+
+
+
       }
+
       &__item-name {
         font-size: 13px;
       }
+
+      &__play-button {
+        cursor: pointer;
+        display: none;
+        background-color: rgb(227, 76, 0);
+        opacity: 0.5;
+        border-radius: 50%;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 60px;
+        height: 60px;
+
+
+        &:hover {
+          opacity: 1;
+        }
+      }
+
+      &__play-image {
+        width: 60px;
+        height: 60px;
+      }
     }
+
   }
+
 }

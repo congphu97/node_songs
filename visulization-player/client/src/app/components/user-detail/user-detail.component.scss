@@ -1,0 +1,171 @@
+p {
+    margin: 0px;
+}
+
+ion-icon {
+    font-size: 20px;
+}
+
+ion-button {
+    --background: #f50;
+
+    --color: white;
+
+    --border-radius: 50%;
+    --border-width: 1px;
+
+    --box-shadow: 0 2px 6px 0 rgb(0, 0, 0, 0.25);
+
+    --ripple-color: deeppink;
+
+    --padding-top: 15px;
+    --padding-bottom: 15px;
+    --padding-end: 14px;
+}
+
+.info__user-name,
+.insight__text,
+.profile__text,
+.spotlight__text {
+    font-weight: bold;
+
+}
+
+.user-detail {
+    &__background {
+        position: relative;
+        height: 140px;
+        background-color: gray;
+    }
+
+    &__info {
+        .info {
+            &__avatar {
+                width: 100%;
+                position: absolute;
+                top: 110px;
+            }
+
+            &__image {
+                height: 80px;
+                width: 80px;
+                border-radius: 50%;
+                border: 1px solid #a8a8a8;
+            }
+
+            &__follower-following {
+                font-size: 13px;
+            }
+
+            &__edit {
+                margin-top: 12px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                .eidt-profile {
+                    &__image-edit {
+                        font-size: 24px;
+                    }
+
+
+                    &__play {
+                        display: flex;
+                        align-items: center;
+                        gap: 10px;
+                    }
+
+                    &__background {
+                        // position: relative;
+                        background-color: #f50;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        padding: 10px;
+                        border-radius: 50%;
+                    }
+
+                    &__image-play {
+                        // position: absolute;
+                        font-size: 30px;
+                    }
+
+                    &__plays-button {
+                        button {
+                            .button-native {
+                                border-radius: 50%;
+
+                            }
+                        }
+
+
+                    }
+                }
+            }
+
+            &__insight {
+                margin: 35px 0px;
+            }
+
+            &__profile {
+                margin-bottom: 35px;
+            }
+
+            &__insight,
+            &__profile {
+                display: flex;
+                justify-content: space-between;
+
+                .insight,
+                .profile {
+                    &__text {}
+
+                    &__image {
+                        // width: 22px;
+                    }
+
+                    &__completed {
+                        color: #f50;
+
+                    }
+
+                    &__completed,
+                    &__complete {
+                        font-size: 13px;
+                    }
+                }
+            }
+
+            &__spotlight {
+                .spotlight {
+                    &__list-pin {
+                        display: flex;
+                        gap: 10px;
+                        overflow: auto;
+                    }
+
+                    &__pin {
+                        margin: 10px 0px;
+                        font-size: 12px;
+                    }
+
+                    &__pin-items {
+                        flex: 0 0 auto;
+                        height: 110px;
+                        width: 110px;
+                        border: 1px dashed black;
+                        border-radius: 10px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                    }
+
+                    &__image {
+                        // width: 22px;
+                    }
+                }
+            }
+
+        }
+    }
+}
