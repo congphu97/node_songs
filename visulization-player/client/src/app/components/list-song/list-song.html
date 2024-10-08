@@ -16,42 +16,53 @@
                         <img class="detail__image" src="https://avatarfiles.alphacoders.com/189/thumb-1920-189957.jpg">
                         <div class="detail__info">
                             <p class="detail__name">Name</p>
-                            <p class="detail__follower"><img class="detail__image-follower" src="assets/person.svg"> 23
+                            <p class="detail__follower">
+                                <ion-icon class="detail__image-follower" name="person-sharp"></ion-icon>23
                             </p>
                             <p class="detail__location">HCM, Vietnam</p>
-                            <p class="detail__button-follow"><img class="detail__image-follower"
-                                    src="assets/person.svg">
+                            <p class="detail__button-follow"> <ion-icon class="detail__image-follower"
+                                    name="person-sharp"></ion-icon>
                                 Follow</p>
                         </div>
                     </div>
                 </div>
                 <p class="song__actor">{{item.author}}</p>
                 <div class="song__interaction interaction">
-                    <p class="interaction__views"> <img class="interaction__image"
-                            src="assets/play.png">{{handleUnitThousand(item.views)}}
+                    <p class="interaction__views">
+                        <ion-icon class="interaction__image"
+                            name="play-sharp"></ion-icon>{{handleUnitThousand(item.views)}}
                     </p>
-                    <a href="" class="interaction__button"> <img class="interaction__image"
-                            src="assets/wish-heart.png">{{handleUnitThousand(item.like)}}</a>
-                    <a href="" class="interaction__button"><img class="interaction__image"
-                            src="assets/reposts.png">{{handleUnitThousand(item.repost)}}</a>
-                    <a href="" class="interaction__button"><img class="interaction__image"
-                            src="assets/comments.png">{{handleUnitThousand(item.comment)}}</a>
+                    <a href="" class="interaction__button">
+                        <ion-icon class="interaction__image"
+                            name="heart-sharp"></ion-icon>{{handleUnitThousand(item.like)}}</a>
+                    <a href="" class="interaction__button">
+                        <ion-icon class="interaction__image"
+                            name="repeat-outline"></ion-icon>{{handleUnitThousand(item.repost)}}</a>
+                    <a href="" class="interaction__button">
+                        <ion-icon class="interaction__image"
+                            name="chatbox-ellipses-outline"></ion-icon>{{handleUnitThousand(item.comment)}}</a>
                 </div>
             </div>
             <div class="song__songs-button songs-button">
-                <span class="songs-button__image-heart--border"><img class="songs-button__image"
-                        src="assets/wish-heart.png"></span>
+                <span class="songs-button__image-heart--border">
+                    <ion-icon class="songs-button__image" name="heart-outline"></ion-icon></span>
                 <div>
                     <span (click)="handleClickOpenMenu()"
-                        [ngClass]="isOpenMenuMore ? 'songs-button__image-more--border--active':'songs-button__image-more--border'"><img
-                            class="songs-button__image" src="assets/ellipsis-horizontal.svg"></span>
+                        [ngClass]="isOpenMenuMore ? 'songs-button__image-more--border--active':'songs-button__image-more--border'">
+                        <ion-icon class="songs-button__image" name="ellipsis-horizontal-outline"></ion-icon>
+                    </span>
                     <ul class="songs-button__menu-more" *ngIf="isOpenMenuMore">
-                        <li class="songs-button__menu-elements"><img class="songs-button__image-menu"
-                                src="assets/reposts.png">Repost</li>
-                        <li class="songs-button__menu-elements"><img class="songs-button__image-menu"
-                                src="assets/share.png">Share</li>
-                        <li class="songs-button__menu-elements"><img class="songs-button__image-menu"
-                                src="assets/copy-link.jpg">Copy Link</li>
+                        <li class="songs-button__menu-elements">
+                            <ion-icon name="repeat-outline"></ion-icon>
+                            Repost
+                        </li>
+                        <li class="songs-button__menu-elements">
+                            <ion-icon name="share-social-outline"></ion-icon>
+                            Share
+                        </li>
+                        <li class="songs-button__menu-elements">
+                            <ion-icon name="link-outline"></ion-icon>Copy Link
+                        </li>
                     </ul>
                 </div>
             </div>
