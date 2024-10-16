@@ -19,6 +19,7 @@ import { DashBoardHeaderComponent } from './components/dashboard-header/dashboar
 import { MainViewComponent } from './components/main-view/main-view.component';
 import { ListSongComponent } from './components/list-song/list-song.component';
 import { BottomComponent } from './components/bottom/bottom.component';
+import { LoginPageComponent } from './components/login-page/login-page.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,7 +35,8 @@ import { BottomComponent } from './components/bottom/bottom.component';
     VisualizationAlbumComponent,
     MainViewComponent,
     ListSongComponent,
-    BottomComponent
+    BottomComponent,
+    LoginPageComponent
   ],
   imports: [
     BrowserModule,
@@ -46,4 +48,4 @@ import { BottomComponent } from './components/bottom/bottom.component';
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
