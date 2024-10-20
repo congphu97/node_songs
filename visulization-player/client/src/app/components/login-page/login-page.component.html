@@ -1,27 +1,42 @@
 <div class="login-page">
-    <div class="login-page__title">Login</div>
-    <div class="login-page__form form">
-        <div class="form__email">
-            <p class="form__text">Email address</p>
-            <input class="form__input" type="email" />
-        </div>
-        <div class="form__password password">
-            <p class="form__text">Password</p>
-            <div class="password__input">
-                <input class="form__input" type="password" />
-                <button class="form__button-clear" aria-label="Clear input" title="Clear input">Reset Password</button>
+    <div class="login-page__image-login">
+        <img class="login-page__image"
+            src="https://img6.thuthuatphanmem.vn/uploads/2022/09/21/anh-chill-cartoon_052457562.jpg"
+            alt="Italian Trulli">
+    </div>
+    <div class="login-page__login-form">
+        <div class="login-page__title">Login</div>
+        <div class="login-page__form form">
+            <div class="form__email">
+                <p class="form__text">Email address</p>
+                <input class="form__input" type="email" />
             </div>
+            <div class="form__password password">
+                <p class="form__text">Password</p>
+                <div class="password__input">
+                    <input class="form__input" [type]="showPassword ? 'string' : 'password'"
+                        [(ngModel)]="valuePassword" />
+                    <div class="form__input-button" *ngIf="valuePassword">
+                        <button (click)="handleResetPw()" class="form__button" aria-label="Clear input"
+                            title="Clear input">Reset Password</button>
+                        <button (click)="handleShowPassword()" class="form__button" aria-label="Clear input"
+                            title="Clear input">
+                            <ion-icon [name]="showPassword ? 'eye-off-outline' : 'eye-outline' "></ion-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="form__save-pw">
+                <ion-checkbox class="form__text-remember-pw" labelPlacement="end">Remember Password</ion-checkbox>
+            </div>
+            <button class="form__button-login">Login</button>
+            <p class="form__text-no-account">Don't have an account? <button class="form__button-signup">Sign
+                    up</button>
+            </p>
+            <div class="form__text-other">or</div>
 
+            <button class="form__button-login-other"><ion-icon name="logo-github"></ion-icon>Authorize with
+                Github</button>
         </div>
-        <div class="form__save-pw">
-            <input type="checkbox" />
-            <label class="form__text-remember-pw">Remember Password</label>
-        </div>
-        <button class="form__button-login">Login</button>
-        <p class="form__text-no-account">Don't have an account? <button class="form__button-signup">Sign up</button></p>
-        <div class="form__text-other">or</div>
-
-        <button class="form__button-login-other"><ion-icon name="logo-github"></ion-icon>Authorize with Github</button>
-
     </div>
 </div>
