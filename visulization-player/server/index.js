@@ -127,6 +127,92 @@ router.get('/stream', async (req, res) => {
   }
 });
 
+// const express = require('express');
+const passport = require('passport');
+const session = require('express-session');
+const GitHubStrategy = require('passport-github2').Strategy;
+
+// GitHub OAuth credentials
+const GITHUB_CLIENT_ID = 'Ov23liMu9W70NVablaSN';       // Replace with your GitHub Client ID
+const GITHUB_CLIENT_SECRET = '471b46038c1dca872bc481f9829b031e66969618'; // Replace with your GitHub Client Secret
+
+// Configure session
+app.use(session({ secret: 'your_secret_key', resave: false, saveUninitialized: true }));
+
+// Initialize Passport
+app.use(passport.initialize());
+app.use(passport.session());
+
+// Serialize and deserialize user
+passport.serializeUser((user, done) => {
+    done(null, user);
+});
+
+passport.deserializeUser((user, done) => {
+    done(null, user);
+});
+
+// Configure GitHub strategy
+passport.use(new GitHubStrategy({
+    clientID: GITHUB_CLIENT_ID,
+    clientSecret: GITHUB_CLIENT_SECRET,
+    callbackURL: "http://localhost:3000/auth/github/callback"
+},
+(accessToken, refreshToken, profile, done) => {
+    // Here, you can save the user info to your database if needed
+    return done(null, profile);
+}));
+
+// Middleware to check if token is expired
+function checkTokenExpiration(req, res, next) {
+  const currentTime = Date.now();
+
+  if (req.user && req.user.token_expiration) {
+      if (currentTime > req.user.token_expiration) {
+          return res.status(401).json({ message: 'Token has expired' });
+      }
+  }
+
+  next();
+}
+
+app.get('/api/user', checkTokenExpiration, (req, res) => {
+  res.json(req.user); // Return user info if logged in
+});
+
+// Routes
+app.get('/', (req, res) => {
+    res.send('<h1>Home</h1><a href="/auth/github">Login with GitHub</a>');
+});
+
+app.get('/auth/github',
+    passport.authenticate('github', { scope: ['user:email'] })
+);
+
+app.get('/auth/github/callback',
+    passport.authenticate('github', { failureRedirect: '/' }),
+    (req, res) => {
+        // Successful authentication, redirect to profile.
+        res.redirect('/profile');
+    }
+);
+
+app.get('/profile', (req, res) => {
+    console.log(req.isAuthenticated())
+    if (!req.isAuthenticated()) {
+        return res.redirect('/');
+    }
+    res.send(`<h1>Hello, ${req.user.displayName}</h1><a href="/logout">Logout</a>`);
+});
+
+app.get('/logout', (req, res) => {
+    req.logout(err => {
+        if (err) return next(err);
+        res.redirect('/');
+    });
+});
+
+
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
